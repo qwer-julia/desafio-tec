@@ -3,7 +3,10 @@ services:
     name: desafio-tec
     runtime: docker
     plan: free
-    dockerCommand: bash -c "./bin/rails db:prepare && ./bin/rails server"
+    # cache/queue/cable share the primary's DB (single free Neon database), so
+    # Rails treats their schema load as touching an already-migrated production
+    # DB and silently skips it unless this check is disabled.
+    dockerCommand: bash -c "DISABLE_DATABASE_ENVIRONMENT_CHECK=1 ./bin/rails db:prepare && ./bin/rails server"
     healthCheckPath: /up
     envVars:
       - key: RAILS_ENV
