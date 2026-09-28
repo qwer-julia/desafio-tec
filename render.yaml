@@ -3,7 +3,7 @@ services:
     name: desafio-tec
     runtime: docker
     plan: free
-    dockerCommand: ./bin/rails server
+    dockerCommand: bash -c "./bin/rails db:prepare && ./bin/rails server"
     healthCheckPath: /up
     envVars:
       - key: RAILS_ENV
