@@ -30,7 +30,7 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 # Pin below 3.0: json 3.0's JSON.parse signature (kwargs-only) breaks
 # ActiveSupport::JSON.decode's positional-hash call, used by signed/encrypted
 # cookies — see https://github.com/rails/rails/issues (json 3.0 compat).
-gem "json", "< 3"
+gem "json", "< 4"
 
 # Use the database-backed adapters for Rails.cache and Action Cable
 gem "solid_cache"
