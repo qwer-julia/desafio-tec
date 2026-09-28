@@ -1,0 +1,23 @@
+<h1 class="font-display text-3xl sm:text-4xl text-3d mb-2">MEU CALENDÁRIO</h1>
+<p class="badge-mono inline-block mb-8"><%= Current.user.points %> pontos até agora</p>
+
+<% if @challenges.empty? %>
+  <div class="flex items-center gap-4">
+    <%= image_tag "mascot/neutro.png", alt: "", class: "w-20 h-auto" %>
+    <p class="text-ink/60">Ainda não teve nenhum desafio.</p>
+  </div>
+<% else %>
+  <ul class="grid sm:grid-cols-2 gap-3">
+    <% @challenges.each do |challenge| %>
+      <% solved = @solved_challenge_ids.include?(challenge.id) %>
+      <li class="card-groovy px-5 py-4 flex justify-between items-center" style="<%= "background: color-mix(in srgb, var(--color-teal) 30%, transparent);" if solved %>">
+        <%= link_to challenge.title, challenge_path(challenge), class: "font-bold link-squiggle" %>
+        <% if solved %>
+          <span class="text-xl" style="color: var(--color-teal);"><%= icon "circle-check", title: "Resolvido" %></span>
+        <% else %>
+          <span class="text-xl opacity-30"><%= icon "square", title: "Não resolvido" %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

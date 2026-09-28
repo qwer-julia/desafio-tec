@@ -1,0 +1,37 @@
+<h1 class="font-display text-2xl sm:text-3xl text-3d-grape mb-6">CRIAR CONTA</h1>
+
+<%= form_with model: @user, url: signup_path(params[:token]), class: "contents" do |form| %>
+  <% if @user.errors.any? %>
+    <div class="alert-sketchy alert-sketchy--error">
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= icon "triangle-exclamation" %> <%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.text_field :name, required: true, autofocus: true, placeholder: "Seu nome", value: @user.name, class: "input-sketchy mt-2" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.email_field :email_address, readonly: true, autocomplete: "username", value: @invitation.email_address, class: "input-sketchy mt-2 opacity-70" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.password_field :password, required: true, autocomplete: "new-password", placeholder: "Senha", maxlength: 72, class: "input-sketchy mt-2" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", placeholder: "Repita a senha", maxlength: 72, class: "input-sketchy mt-2" %>
+  </div>
+
+  <div class="sm:flex sm:items-center sm:gap-4 mt-6">
+    <%= form.submit "Cadastrar", class: "btn-funky btn-funky--teal w-full sm:w-auto text-center cursor-pointer" %>
+
+    <div class="mt-4 text-sm sm:mt-0">
+      <%= link_to "Já tem conta? Entrar", login_path, class: "link-squiggle font-bold" %>
+    </div>
+  </div>
+<% end %>

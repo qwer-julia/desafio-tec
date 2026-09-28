@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Desafio Tec" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Desafio Tec">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Shantell+Sans:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="text-ink">
+    <%= render "shared/sketchy_defs" %>
+
+    <nav class="bg-paper border-b-[1.5px] border-ink relative z-10">
+      <div class="container mx-auto px-5 py-4 flex flex-wrap items-center justify-between gap-4">
+        <%= link_to root_path, class: "font-display text-xl sm:text-2xl text-3d-sm shrink-0" do %>DESAFIO TEC<% end %>
+
+        <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-sm font-bold">
+          <%= link_to "Desafios", challenges_path, class: "nav-link" %>
+          <%= link_to "Placar", scoreboard_path, class: "nav-link" %>
+
+          <% if authenticated? %>
+            <%= link_to "Meu calendário", calendar_path, class: "nav-link" %>
+            <%= link_to "Equipe", team_calendar_path, class: "nav-link" %>
+            <% if Current.user.admin? %>
+              <%= link_to "+ Novo desafio", new_admin_challenge_path, class: "btn-funky btn-funky--teal text-xs! py-1.5! px-3!" %>
+              <%= link_to "Convidar", new_admin_invitation_path, class: "nav-link" %>
+            <% end %>
+            <span class="badge-mono">
+              <%= Current.user.name %> · <%= Current.user.points %> pts
+            </span>
+            <%= button_to "Sair", logout_path, method: :delete, class: "nav-link bg-transparent cursor-pointer" %>
+          <% else %>
+            <%= link_to "Entrar", login_path, class: "btn-funky btn-funky--pink text-xs! py-1.5! px-3!" %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container mx-auto mt-8 mb-16 px-5 relative">
+      <div class="browser-window relative z-10 max-w-4xl mx-auto">
+        <div class="browser-window__bar">
+          <span class="browser-window__dot" style="background: var(--color-hotpink);"></span>
+          <span class="browser-window__dot" style="background: var(--color-yellow);"></span>
+          <span class="browser-window__dot" style="background: var(--color-teal);"></span>
+          <span class="browser-window__url">desafio-tec.local<%= request.path %></span>
+        </div>
+        <div class="p-6 sm:p-10">
+          <%= render "shared/flash" %>
+          <%= yield %>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

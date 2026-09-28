@@ -1,0 +1,30 @@
+<h1 class="font-display text-3xl sm:text-4xl text-3d-grape mb-8">PLACAR</h1>
+
+<div class="card-groovy overflow-hidden">
+  <div class="px-5 py-3 font-mono text-xs uppercase tracking-widest" style="background: var(--color-ink); color: var(--color-yellow);">
+    high scores
+  </div>
+  <table class="w-full">
+    <thead class="sr-only">
+      <tr>
+        <th>#</th>
+        <th>Nome</th>
+        <th>Pontos</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y-2" style="border-color: var(--color-ink);">
+      <% @ranked_users.each_with_index do |user, index| %>
+        <% medal = [ "var(--color-yellow)", "#9ca3af", "#b87333" ][index] %>
+        <tr class="<%= 'font-display' if medal %>" style="<%= "background: color-mix(in srgb, var(--color-yellow) #{[30, 20, 12][index]}%, transparent);" if medal %>">
+          <td class="w-10 text-center font-display text-lg py-3.5 pl-5" style="color: var(--color-grape);">
+            <% if medal %><span style="color: <%= medal %>;"><%= icon "medal", title: "#{index + 1}º lugar" %></span><% else %>#<%= index + 1 %><% end %>
+          </td>
+          <td class="font-bold py-3.5 px-4 w-full"><%= user.name %></td>
+          <td class="py-3.5 pr-5 text-right whitespace-nowrap">
+            <span class="badge-mono"><%= user.points_count %> pts</span>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

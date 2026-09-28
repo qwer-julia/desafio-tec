@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for(:title) || "Desafio Tec" %></title>
+    <!--[if mso]>
+    <noscript>
+      <xml>
+        <o:OfficeDocumentSettings>
+          <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+      </xml>
+    </noscript>
+    <style>
+      table { border-collapse: collapse; }
+    </style>
+    <![endif]-->
+  </head>
+  <body style="margin:0; padding:0; background-color:#f2f2ef; font-family:'Shantell Sans', Verdana, Arial, sans-serif;">
+    <% if content_for?(:preheader) %>
+      <div style="display:none; max-height:0; overflow:hidden; opacity:0; font-size:1px; line-height:1px; color:#f2f2ef;">
+        <%= yield :preheader %>
+      </div>
+    <% end %>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f2f2ef;">
+      <tr>
+        <td align="center" style="padding:32px 16px;">
+
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px; background-color:#fdfdfb; border:2px solid #1a1a1a; border-radius:20px 24px 18px 22px;">
+            <tr>
+              <td style="padding:14px 20px; border-bottom:1px dashed rgba(26,26,26,0.35);">
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td style="padding-right:6px;"><span style="display:inline-block; width:10px; height:10px; line-height:10px; border-radius:50%; background-color:#262626; border:1.5px solid #1a1a1a; font-size:1px;">&nbsp;</span></td>
+                    <td style="padding-right:6px;"><span style="display:inline-block; width:10px; height:10px; line-height:10px; border-radius:50%; background-color:#FFC10A; border:1.5px solid #1a1a1a; font-size:1px;">&nbsp;</span></td>
+                    <td><span style="display:inline-block; width:10px; height:10px; line-height:10px; border-radius:50%; background-color:#595959; border:1.5px solid #1a1a1a; font-size:1px;">&nbsp;</span></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:24px 28px 0;">
+                <span style="font-family:'Kalam','Trebuchet MS',cursive; font-weight:700; font-size:18px; color:#1a1a1a;">DESAFIO TEC</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:16px 28px 32px; font-family:'Shantell Sans', Verdana, Arial, sans-serif; font-size:15px; line-height:1.65; color:#1a1a1a;">
+                <%= yield %>
+              </td>
+            </tr>
+          </table>
+
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px;">
+            <tr>
+              <td align="center" style="padding:20px 16px 0; font-family:'Space Mono','Courier New',monospace; font-size:11px; letter-spacing:0.05em; text-transform:uppercase; color:rgba(26,26,26,0.55);">
+                Desafio Tec &middot; e-mail autom&aacute;tico, n&atilde;o responda
+              </td>
+            </tr>
+          </table>
+
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

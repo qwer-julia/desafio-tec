@@ -1,0 +1,11 @@
+<h1 class="font-display text-2xl sm:text-3xl text-3d mb-8">CONVIDAR PESSOA</h1>
+
+<%= form_with model: @invitation, url: admin_invitations_path, class: "contents" do |form| %>
+  <div class="my-5">
+    <%= form.label :email_address, "E-mail", class: "block font-display text-xs mb-1.5", style: "color: var(--color-grape);" %>
+    <%= form.email_field :email_address, required: true, autofocus: true, class: "input-sketchy" %>
+    <p class="badge-mono normal-case mt-2 inline-block">convidar de novo um e-mail pendente reenvia o link</p>
+  </div>
+
+  <%= form.submit "Enviar convite", class: "btn-funky btn-funky--grape cursor-pointer" %>
+<% end %>

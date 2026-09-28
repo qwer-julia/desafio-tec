@@ -1,0 +1,9 @@
+<h1 class="font-display text-2xl sm:text-3xl text-3d-grape mb-6">ESQUECEU SUA SENHA?</h1>
+
+<%= form_with url: passwords_path, class: "contents" do |form| %>
+  <div class="my-5">
+    <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Seu e-mail", value: params[:email_address], class: "input-sketchy mt-2" %>
+  </div>
+
+  <%= form.submit "Enviar instruções", class: "btn-funky btn-funky--pink w-full sm:w-auto text-center cursor-pointer" %>
+<% end %>

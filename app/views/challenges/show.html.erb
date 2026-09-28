@@ -1,0 +1,69 @@
+<p class="mb-4">
+  <%= link_to challenges_path, class: "link-squiggle text-sm font-bold" do %><%= icon "arrow-left" %> Todos os desafios<% end %>
+</p>
+
+<h1 class="font-display text-2xl sm:text-3xl text-3d mb-2"><%= @challenge.title %></h1>
+<p class="badge-mono inline-block mb-6">
+  <% if @challenge.open? %>
+    aberto até <%= l(@challenge.ends_at, format: :long) %>
+  <% elsif @challenge.upcoming? %>
+    abre em <%= l(@challenge.starts_at, format: :long) %>
+  <% else %>
+    encerrado em <%= l(@challenge.ends_at, format: :long) %>
+  <% end %>
+</p>
+
+<div class="mb-8 leading-relaxed"><%= simple_format(@challenge.description) %></div>
+
+<% mascot = if @my_submission then "feliz" elsif @challenge.open? then "confuso" elsif @challenge.past? then "triste" end %>
+<% if mascot %>
+  <%= image_tag "mascot/#{mascot}.png", alt: "", class: "hidden md:block fixed right-6 bottom-0 w-40 lg:w-52 h-auto pointer-events-none z-20" %>
+<% end %>
+
+<% if @my_submission %>
+  <div class="card-groovy p-5 mb-8" style="background: var(--color-teal);">
+    <div>
+      <p class="font-bold">Você resolveu esse desafio. 1 ponto garantido!</p>
+      <% if @my_submission.file.attached? %>
+        <p class="text-sm mt-1">
+          Sua entrega de <%= l(@my_submission.submitted_at, format: :short) %>:
+          <%= link_to @my_submission.file.filename, rails_blob_path(@my_submission.file, disposition: "attachment"), class: "link-squiggle font-bold" %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% if @challenge.open? %>
+  <% unless @my_submission %>
+    <section class="card-groovy p-6 mb-8">
+      <h2 class="font-display text-lg mb-4">SUA ENTREGA</h2>
+      <%= form_with url: challenge_submission_path(@challenge), class: "contents" do |form| %>
+        <div class="my-3">
+          <%= form.file_field :file, required: true, accept: ".zip,application/zip", class: "input-sketchy" %>
+          <p class="badge-mono normal-case mt-2 inline-block">arquivo .zip com a sua solução · até 50 MB</p>
+        </div>
+        <%= form.submit "Enviar", class: "btn-funky btn-funky--grape cursor-pointer" %>
+      <% end %>
+    </section>
+  <% end %>
+<% elsif @challenge.upcoming? %>
+  <div class="badge-mono inline-block mb-8">esse desafio ainda não abriu</div>
+<% elsif @my_submission %>
+  <div class="badge-mono inline-block mb-8">esse desafio já foi encerrado</div>
+<% else %>
+  <div class="badge-mono inline-block mb-8">esse desafio já foi encerrado e você não entregou</div>
+<% end %>
+
+<section>
+  <h2 class="font-display text-sm mb-3" style="color: var(--color-grape);"><%= icon "diamond" %> QUEM JÁ RESOLVEU (<%= @solvers.size %>)</h2>
+  <% if @solvers.empty? %>
+    <p class="text-ink/60">Ninguém ainda.</p>
+  <% else %>
+    <ul class="flex flex-wrap gap-2">
+      <% @solvers.each do |solver| %>
+        <li class="badge-mono normal-case"><%= solver.name %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>

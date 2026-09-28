@@ -1,0 +1,35 @@
+<h1 class="font-display text-3xl sm:text-4xl text-3d mb-8">CALENDÁRIO DA EQUIPE</h1>
+
+<div class="space-y-10">
+  <% @months.each do |month| %>
+    <section class="card-groovy p-4 sm:p-6">
+      <h2 class="font-display text-xl sm:text-2xl mb-4">
+        <%= I18n.t("date.month_names")[month.month] %> <span class="text-ink/50"><%= month.year %></span>
+      </h2>
+
+      <div class="grid grid-cols-7 gap-1 sm:gap-2">
+        <% %w[ DOM SEG TER QUA QUI SEX SÁB ].each do |weekday| %>
+          <div class="font-mono text-[0.65rem] sm:text-xs text-center tracking-wide text-ink/60 pb-1"><%= weekday %></div>
+        <% end %>
+
+        <% month.wday.times do %>
+          <div></div>
+        <% end %>
+
+        <% (month..month.end_of_month).each do |day| %>
+          <% deliveries = @submissions_by_day.fetch(day, []) %>
+          <div class="calendar-day <%= "calendar-day--today" if day == Date.current %> <%= "calendar-day--future" if day > Date.current %>">
+            <span class="calendar-day__number"><%= day.day %></span>
+            <ul class="space-y-0.5 min-w-0">
+              <% deliveries.each do |submission| %>
+                <li class="calendar-day__name" title="<%= submission.user.name %> · <%= submission.challenge.title %>">
+                  <%= submission.user.name %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+    </section>
+  <% end %>
+</div>

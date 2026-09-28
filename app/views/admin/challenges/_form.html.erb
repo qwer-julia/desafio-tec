@@ -1,0 +1,45 @@
+<%= form_with model: challenge, url: url, class: "contents" do |form| %>
+  <% if challenge.errors.any? %>
+    <div class="alert-sketchy alert-sketchy--error">
+      <ul>
+        <% challenge.errors.full_messages.each do |message| %>
+          <li><%= icon "triangle-exclamation" %> <%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :title, "Título", class: "block font-display text-xs mb-1.5", style: "color: var(--color-grape);" %>
+    <%= form.text_field :title, required: true, autofocus: true, class: "input-sketchy" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :description, "Enunciado", class: "block font-display text-xs mb-1.5", style: "color: var(--color-grape);" %>
+    <%= form.text_area :description, required: true, rows: 10, class: "input-sketchy" %>
+  </div>
+
+  <div class="my-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div>
+      <%= form.label :starts_at, "Abre em", class: "block font-display text-xs mb-1.5", style: "color: var(--color-grape);" %>
+      <%= form.datetime_field :starts_at, required: true, class: "input-sketchy" %>
+    </div>
+    <div>
+      <%= form.label :ends_at, "Fecha em", class: "block font-display text-xs mb-1.5", style: "color: var(--color-grape);" %>
+      <%= form.datetime_field :ends_at, required: true, class: "input-sketchy" %>
+    </div>
+  </div>
+
+  <div class="my-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div>
+      <%= form.label :prize_name, "Prêmio da semana", class: "block font-display text-xs mb-1.5", style: "color: var(--color-grape);" %>
+      <%= form.text_field :prize_name, placeholder: "ex: Brigadeiro gourmet", class: "input-sketchy" %>
+    </div>
+    <div>
+      <%= form.label :prize_image, "Foto do prêmio (PNG sem fundo)", class: "block font-display text-xs mb-1.5", style: "color: var(--color-grape);" %>
+      <%= form.file_field :prize_image, accept: "image/png", class: "input-sketchy" %>
+    </div>
+  </div>
+
+  <%= form.submit challenge.new_record? ? "Criar desafio" : "Salvar alterações", class: "btn-funky btn-funky--grape cursor-pointer" %>
+<% end %>

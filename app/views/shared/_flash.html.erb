@@ -1,0 +1,10 @@
+<% if flash[:alert] %>
+  <div id="alert" class="animate-pop-in alert-sketchy alert-sketchy--error">
+    <%= icon "triangle-exclamation" %> <%= flash[:alert] %>
+  </div>
+<% end %>
+<% if flash[:notice] %>
+  <div id="notice" class="animate-pop-in alert-sketchy alert-sketchy--success">
+    <%= icon "circle-check" %> <%= flash[:notice] %>
+  </div>
+<% end %>

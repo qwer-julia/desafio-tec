@@ -1,0 +1,7 @@
+<%# Hand-drawn wobble filter shared by .card-groovy, .btn-funky, .browser-window borders %>
+<svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+  <filter id="sketchy" x="-20%" y="-20%" width="140%" height="140%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.018 0.035" numOctaves="2" seed="4" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>

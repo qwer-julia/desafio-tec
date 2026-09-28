@@ -1,0 +1,69 @@
+<h1 class="font-display text-3xl sm:text-4xl text-3d mb-8">DESAFIOS</h1>
+
+<% if @current_challenge %>
+  <section class="card-groovy p-6 sm:p-8 mb-10 relative overflow-hidden" style="background: var(--color-yellow);">
+    <div class="absolute right-4 -bottom-3 hidden sm:block">
+      <%= image_tag "mascot/neutro.png", alt: "", class: "w-28 h-auto" %>
+    </div>
+    <span class="badge-mono mb-3 inline-block" style="background: var(--color-ink); color: var(--color-yellow);">
+      desafio da semana · até <%= l(@current_challenge.ends_at, format: :long) %>
+    </span>
+    <h2 class="font-display text-xl sm:text-2xl mb-4 max-w-md leading-snug">
+      <%= link_to @current_challenge.title, challenge_path(@current_challenge), class: "hover:underline decoration-4" %>
+    </h2>
+    <%= link_to challenge_path(@current_challenge), class: "btn-funky btn-funky--pink" do %>Encarar o desafio <%= icon "arrow-right" %><% end %>
+  </section>
+
+  <% if @current_challenge.prize_image.attached? %>
+    <section class="card-groovy p-6 sm:p-8 mb-10 flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
+      <div class="prize-spotlight">
+        <svg viewBox="0 0 200 200" class="prize-spotlight__star" aria-hidden="true">
+          <polygon points="100,0 122.9,29.6 158.8,19.1 159.9,56.5 195.1,69.1 174,100 195.1,130.9 159.9,143.5 158.8,180.9 122.9,170.4 100,200 77.1,170.4 41.2,180.9 40.1,143.5 4.9,130.9 26,100 4.9,69.1 40.1,56.5 41.2,19.1 77.1,29.6"
+                   fill="var(--color-yellow)" stroke="var(--color-ink)" stroke-width="2" stroke-linejoin="round" filter="url(#sketchy)" />
+        </svg>
+        <%= image_tag @current_challenge.prize_image, alt: @current_challenge.prize_name.presence || "Prêmio da semana", class: "prize-spotlight__product" %>
+      </div>
+      <div class="text-center sm:text-left">
+        <span class="badge-mono mb-3 inline-block"><%= icon "trophy" %> prêmio da semana</span>
+        <% if @current_challenge.prize_name.present? %>
+          <h2 class="font-display text-2xl sm:text-3xl leading-snug"><%= @current_challenge.prize_name %></h2>
+        <% end %>
+        <p class="text-ink/60 mt-1">pra todo mundo que resolver o desafio <%= icon "candy-cane" %></p>
+      </div>
+    </section>
+  <% end %>
+<% else %>
+  <div class="flex items-center gap-4 mb-10">
+    <%= image_tag "mascot/neutro.png", alt: "", class: "w-20 h-auto" %>
+    <p class="badge-mono inline-block">nenhum desafio aberto no momento</p>
+  </div>
+<% end %>
+
+<% if @upcoming_challenges.any? %>
+  <section class="mb-10">
+    <h2 class="font-display text-sm mb-3" style="color: var(--color-grape);"><%= icon "diamond" %> PRÓXIMOS DESAFIOS</h2>
+    <ul class="flex flex-wrap gap-3">
+      <% @upcoming_challenges.each do |challenge| %>
+        <li class="badge-mono normal-case text-sm px-3 py-2">
+          <%= challenge.title %> · abre <%= l(challenge.starts_at, format: :short) %>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
+<section>
+  <h2 class="font-display text-sm mb-3" style="color: var(--color-grape);"><%= icon "diamond" %> DESAFIOS ANTERIORES</h2>
+  <% if @past_challenges.empty? %>
+    <p class="text-ink/60">Ainda não teve nenhum.</p>
+  <% else %>
+    <ul class="space-y-3">
+      <% @past_challenges.each do |challenge| %>
+        <li class="card-groovy px-5 py-4 flex justify-between items-center transition-transform hover:-translate-y-0.5">
+          <%= link_to challenge.title, challenge_path(challenge), class: "font-bold link-squiggle" %>
+          <span class="badge-mono"><%= icon "trophy" %> <%= challenge.solvers.count %> resolveram</span>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>

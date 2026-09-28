@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Desafio Tec" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Shantell+Sans:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="text-ink min-h-screen flex items-center">
+    <%= render "shared/sketchy_defs" %>
+
+    <main class="container mx-auto px-5 py-16 relative z-10">
+      <div class="max-w-3xl mx-auto grid md:grid-cols-[auto_1fr] gap-6 items-center">
+        <div class="justify-self-center">
+          <%= image_tag "mascot/login.png", alt: "", class: "w-40 sm:w-52 h-auto" %>
+        </div>
+
+        <div class="browser-window w-full">
+          <div class="browser-window__bar">
+            <span class="browser-window__dot" style="background: var(--color-hotpink);"></span>
+            <span class="browser-window__dot" style="background: var(--color-yellow);"></span>
+            <span class="browser-window__dot" style="background: var(--color-teal);"></span>
+            <span class="browser-window__url">desafio-tec.local<%= request.path %></span>
+          </div>
+          <div class="p-6 sm:p-8">
+            <%= link_to root_path, class: "font-display text-lg text-3d-sm inline-block mb-6" do %>DESAFIO TEC<% end %>
+            <%= render "shared/flash" %>
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

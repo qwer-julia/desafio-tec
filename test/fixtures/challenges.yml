@@ -1,0 +1,23 @@
+current_week:
+  title: Desafio da semana atual
+  slug: desafio-da-semana-atual
+  description: Some fibonacci-flavored puzzle.
+  starts_at: <%= 2.days.ago %>
+  ends_at: <%= 5.days.from_now %>
+  created_by: one
+
+last_week:
+  title: Desafio da semana passada
+  slug: desafio-da-semana-passada
+  description: Some older puzzle.
+  starts_at: <%= 9.days.ago %>
+  ends_at: <%= 2.days.ago %>
+  created_by: one
+
+next_week:
+  title: Desafio da próxima semana
+  slug: desafio-da-proxima-semana
+  description: Not open yet.
+  starts_at: <%= 5.days.from_now %>
+  ends_at: <%= 12.days.from_now %>
+  created_by: one

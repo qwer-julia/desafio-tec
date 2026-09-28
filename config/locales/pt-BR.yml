@@ -1,0 +1,103 @@
+pt-BR:
+  errors:
+    messages:
+      required: "deve existir"
+      taken: "já está em uso"
+      blank: "não pode ficar em branco"
+      invalid: "é inválido"
+      greater_than: "deve ser maior que %{count}"
+      confirmation: "não é igual a %{attribute}"
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+      short: "%d/%m %H:%M"
+      long: "%d/%m/%Y às %H:%M"
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      short: "%d/%m"
+      long: "%d/%m/%Y"
+    month_names:
+      -
+      - Janeiro
+      - Fevereiro
+      - Março
+      - Abril
+      - Maio
+      - Junho
+      - Julho
+      - Agosto
+      - Setembro
+      - Outubro
+      - Novembro
+      - Dezembro
+    order:
+      - :day
+      - :month
+      - :year
+  datetime:
+    distance_in_words:
+      half_a_minute: "meio minuto"
+      less_than_x_seconds:
+        one: "menos de 1 segundo"
+        other: "menos de %{count} segundos"
+      x_seconds:
+        one: "1 segundo"
+        other: "%{count} segundos"
+      less_than_x_minutes:
+        one: "menos de um minuto"
+        other: "menos de %{count} minutos"
+      x_minutes:
+        one: "1 minuto"
+        other: "%{count} minutos"
+      about_x_hours:
+        one: "aproximadamente 1 hora"
+        other: "aproximadamente %{count} horas"
+      x_days:
+        one: "1 dia"
+        other: "%{count} dias"
+      about_x_months:
+        one: "aproximadamente 1 mês"
+        other: "aproximadamente %{count} meses"
+      x_months:
+        one: "1 mês"
+        other: "%{count} meses"
+      about_x_years:
+        one: "aproximadamente 1 ano"
+        other: "aproximadamente %{count} anos"
+      over_x_years:
+        one: "mais de 1 ano"
+        other: "mais de %{count} anos"
+      almost_x_years:
+        one: "quase 1 ano"
+        other: "quase %{count} anos"
+  support:
+    array:
+      last_word_connector: " e "
+      two_words_connector: " e "
+      words_connector: ", "
+  attributes:
+    name: "Nome"
+    email_address: "E-mail"
+    password: "Senha"
+    password_confirmation: "Confirmação de senha"
+    title: "Título"
+    description: "Enunciado"
+    starts_at: "Data de abertura"
+    ends_at: "Data de encerramento"
+    answer: "Resposta"
+    answer_digest: "Resposta"
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "A validação falhou: %{errors}"
+    models:
+      user:
+        one: "Usuário"
+        other: "Usuários"
+      challenge:
+        one: "Desafio"
+        other: "Desafios"
+      submission:
+        one: "Resposta"
+        other: "Respostas"

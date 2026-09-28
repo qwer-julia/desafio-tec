@@ -1,0 +1,8 @@
+pending:
+  email_address: invited@example.com
+  invited_by: one
+
+accepted:
+  email_address: two@example.com
+  invited_by: one
+  accepted_at: <%= 1.day.ago %>
