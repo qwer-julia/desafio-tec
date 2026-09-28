@@ -55,6 +55,7 @@ Rails.application.configure do
   # Set host to be used by links generated in mailer templates (e.g. the
   # invitation acceptance link). Must match the app's public URL.
   config.action_mailer.default_url_options = { host: "desafio-tec.onrender.com" }
+  config.action_mailer.asset_host = "https://desafio-tec.onrender.com"
 
   # Send outgoing mail through the Brevo HTTP API (see lib/brevo_delivery_method.rb
   # and config/initializers/brevo.rb, which registers the delivery method and its
