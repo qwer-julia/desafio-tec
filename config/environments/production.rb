@@ -56,18 +56,11 @@ Rails.application.configure do
   # invitation acceptance link). Must match the app's public URL.
   config.action_mailer.default_url_options = { host: "desafio-tec.onrender.com" }
 
-  # Send outgoing mail through Gmail. Credentials are in config/credentials.yml.enc
-  # under smtp: (user_name is the sending address, password is a Google App
-  # Password, not the account password).
-  config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: "gmail.com",
-    user_name: Rails.application.credentials.dig(:smtp, :user_name),
-    password: Rails.application.credentials.dig(:smtp, :password),
-    authentication: :plain,
-    enable_starttls_auto: true
-  }
+  # Send outgoing mail through the Brevo HTTP API (see lib/brevo_delivery_method.rb
+  # and config/initializers/brevo.rb, which registers the delivery method and its
+  # API key). Render blocks outbound SMTP ports, so plain SMTP (including Gmail)
+  # can't connect from here; Brevo's API works over normal HTTPS instead.
+  config.action_mailer.delivery_method = :brevo
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
