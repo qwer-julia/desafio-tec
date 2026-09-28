@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root "challenges#index"
+  mount ActiveStorageDB::Engine => "/active_storage_db"
 
   get "up" => "rails/health#show", as: :rails_health_check
 

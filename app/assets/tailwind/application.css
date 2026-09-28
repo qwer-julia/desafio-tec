@@ -280,7 +280,8 @@
 
   /* ---- sketchy alert boxes ---- */
   .alert-sketchy {
-    display: inline-block;
+    display: block;
+    width: fit-content;
     font-weight: 700;
     padding: 0.6rem 1rem;
     margin-bottom: 1.25rem;

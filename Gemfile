@@ -20,6 +20,8 @@ gem "tailwindcss-rails"
 gem "jbuilder"
 # Render challenge descriptions written in Markdown
 gem "commonmarker", "~> 2.10"
+# Store Active Storage uploads in Postgres (Render's disk is ephemeral)
+gem "active_storage_db", "~> 1.6"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1.7"

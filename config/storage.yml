@@ -25,3 +25,7 @@ local:
 #   service: Mirror
 #   primary: local
 #   mirrors: [ amazon, google, microsoft ]
+
+# Render's free disk is wiped on every deploy/restart, so production keeps files in Postgres.
+db:
+  service: DB
