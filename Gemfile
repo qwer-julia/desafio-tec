@@ -30,9 +30,8 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 # cookies — see https://github.com/rails/rails/issues (json 3.0 compat).
 gem "json", "< 3"
 
-# Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
+# Use the database-backed adapters for Rails.cache and Action Cable
 gem "solid_cache"
-gem "solid_queue"
 gem "solid_cable"
 
 # Reduces boot times through caching; required in config/boot.rb

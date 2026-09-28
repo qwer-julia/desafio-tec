@@ -3,10 +3,14 @@ services:
     name: desafio-tec
     runtime: docker
     plan: free
-    # cache/queue/cable share the primary's DB (single free Neon database), so
+    # cache/cable share the primary's DB (single free Neon database), so
     # Rails treats their schema load as touching an already-migrated production
-    # DB and silently skips it unless this check is disabled.
-    dockerCommand: bash -c "DISABLE_DATABASE_ENVIRONMENT_CHECK=1 ./bin/rails db:prepare && ./bin/rails server"
+    # DB and silently skips it unless this check is disabled. db:prepare also
+    # skips loading their schema entirely (it sees the shared schema_migrations
+    # table already populated by the primary and assumes they're initialized),
+    # so db:prepare_shared (lib/tasks/render.rake) loads it for them directly,
+    # once per table that's actually missing.
+    dockerCommand: bash -c "DISABLE_DATABASE_ENVIRONMENT_CHECK=1 ./bin/rails db:prepare db:prepare_shared && ./bin/rails server"
     healthCheckPath: /up
     envVars:
       - key: RAILS_ENV
@@ -14,8 +18,6 @@ services:
       - key: RAILS_LOG_TO_STDOUT
         value: "true"
       - key: RAILS_SERVE_STATIC_FILES
-        value: "true"
-      - key: SOLID_QUEUE_IN_PUMA
         value: "true"
       - key: WEB_CONCURRENCY
         value: "1"
