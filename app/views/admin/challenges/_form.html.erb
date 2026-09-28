@@ -14,9 +14,19 @@
     <%= form.text_field :title, required: true, autofocus: true, class: "input-sketchy" %>
   </div>
 
-  <div class="my-5">
+  <div class="my-5" data-controller="markdown-editor">
     <%= form.label :description, "Enunciado", class: "block font-display text-xs mb-1.5", style: "color: var(--color-grape);" %>
-    <%= form.text_area :description, required: true, rows: 10, class: "input-sketchy" %>
+    <div class="md-toolbar">
+      <button type="button" data-action="markdown-editor#bold" title="Negrito"><strong>B</strong></button>
+      <button type="button" data-action="markdown-editor#heading1" title="Título grande">H1</button>
+      <button type="button" data-action="markdown-editor#heading2" title="Título médio">H2</button>
+      <button type="button" data-action="markdown-editor#heading3" title="Título pequeno">H3</button>
+      <button type="button" data-action="markdown-editor#list" title="Lista">• lista</button>
+      <button type="button" data-action="markdown-editor#code" title="Código na linha">`código`</button>
+      <button type="button" data-action="markdown-editor#codeBlock" title="Bloco de código">``` bloco</button>
+    </div>
+    <%= form.text_area :description, required: true, rows: 14, class: "input-sketchy font-mono text-sm", data: { markdown_editor_target: "input" } %>
+    <p class="badge-mono normal-case mt-2 inline-block">aceita Markdown: **negrito**, # título, `código`, ``` bloco ```</p>
   </div>
 
   <div class="my-5 grid grid-cols-1 sm:grid-cols-2 gap-4">

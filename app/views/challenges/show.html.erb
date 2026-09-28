@@ -13,7 +13,7 @@
   <% end %>
 </p>
 
-<div class="mb-8 leading-relaxed"><%= simple_format(@challenge.description) %></div>
+<div class="markdown-body mb-8"><%= markdown(@challenge.description) %></div>
 
 <% mascot = if @my_submission then "feliz" elsif @challenge.open? then "confuso" elsif @challenge.past? then "triste" end %>
 <% if mascot %>

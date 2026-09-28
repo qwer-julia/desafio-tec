@@ -1,0 +1,52 @@
+<% content_for :title, "Regras · Desafio Tec" %>
+
+<h1 class="font-display text-3xl sm:text-4xl text-3d-grape mb-8">REGRAS</h1>
+
+<div class="card-groovy overflow-hidden">
+  <div class="px-5 py-3 font-mono text-xs uppercase tracking-widest" style="background: var(--color-ink); color: var(--color-yellow);">
+    leia antes de começar
+  </div>
+  <ol class="divide-y-2" style="border-color: var(--color-ink);">
+    <li class="flex gap-4 px-5 py-5">
+      <span class="text-2xl shrink-0" style="color: var(--color-yellow);"><%= icon "trophy" %></span>
+      <div>
+        <h2 class="font-display text-xl mb-1">Entregou até sexta, ganhou</h2>
+        <p>Todo mundo que entregar o desafio até <strong>sexta-feira</strong> ganha o prêmio.</p>
+      </div>
+    </li>
+    <li class="flex gap-4 px-5 py-5">
+      <span class="text-2xl shrink-0" style="color: var(--color-hotpink);"><%= icon "diamond" %></span>
+      <div>
+        <h2 class="font-display text-xl mb-1">Em Ruby!!!</h2>
+        <p>A solução tem que ser escrita em Ruby.</p>
+      </div>
+    </li>
+    <li class="flex gap-4 px-5 py-5">
+      <span class="text-2xl shrink-0" style="color: var(--color-grape);"><%= icon "triangle-exclamation" %></span>
+      <div>
+        <h2 class="font-display text-xl mb-1">Sem IA</h2>
+        <p>Não use IA para solucionar o problema (por favor).</p>
+      </div>
+    </li>
+    <li class="flex gap-4 px-5 py-5">
+      <span class="text-2xl shrink-0" style="color: var(--color-teal);"><%= icon "star" %></span>
+      <div>
+        <h2 class="font-display text-xl mb-1">Tentou e não conseguiu?</h2>
+        <p>Participe das conversas sobre o desafio para entender como outras pessoas resolveram. Infelizmente o brinde fica pra próxima!</p>
+      </div>
+    </li>
+    <li class="flex gap-4 px-5 py-5">
+      <span class="text-2xl shrink-0" style="color: var(--color-hotpink);"><%= icon "candy-cane" %></span>
+      <div>
+        <h2 class="font-display text-xl mb-1">Reclamações</h2>
+        <% email = mail_to "fonjulia89@gmail.com", nil, class: "font-bold underline" %>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Está muito difícil? Mande um email para <%= email %> reclamando.</li>
+          <li>Está muito fácil? Mande um email para <%= email %>.</li>
+          <li>Não está contente com o brinde? Mande para <%= email %>.</li>
+        </ul>
+        <p class="mt-2 text-sm italic">(O email ser respondido depende completamente da minha vibe, mas geralmente respondo.)</p>
+      </div>
+    </li>
+  </ol>
+</div>
