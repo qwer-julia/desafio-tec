@@ -1,0 +1,29 @@
+<h1 class="font-display text-3xl sm:text-4xl text-3d mb-2"><%= @user.name.upcase %></h1>
+<p class="badge-mono inline-block mb-8"><%= @user.points %> pontos até agora</p>
+<p class="mb-8"><%= link_to "← Voltar ao placar", scoreboard_path, class: "link-squiggle font-bold" %></p>
+
+<% if @challenges.empty? %>
+  <div class="flex items-center gap-4">
+    <%= image_tag "mascot/neutro.png", alt: "", class: "w-20 h-auto" %>
+    <p class="text-ink/60">Ainda não teve nenhum desafio.</p>
+  </div>
+<% else %>
+  <ul class="grid sm:grid-cols-2 gap-3">
+    <% @challenges.each do |challenge| %>
+      <% submission = @submissions_by_challenge_id[challenge.id] %>
+      <li class="card-groovy px-5 py-4 flex justify-between items-center gap-3" style="<%= "background: color-mix(in srgb, var(--color-teal) 30%, transparent);" if submission %>">
+        <%= link_to challenge.title, challenge_path(challenge), class: "font-bold link-squiggle" %>
+        <span class="flex items-center gap-3">
+          <% if submission && !challenge.open? %>
+            <%= link_to "Baixar", scoreboard_download_path(@user, challenge), class: "badge-mono", title: "Baixar entrega" %>
+          <% end %>
+          <% if submission %>
+            <span class="text-xl" style="color: var(--color-teal);"><%= icon "circle-check", title: "Resolvido" %></span>
+          <% else %>
+            <span class="text-xl opacity-30"><%= icon "square", title: "Não resolvido" %></span>
+          <% end %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
