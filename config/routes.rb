@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   end
 
   get "placar", to: "scoreboard#show", as: :scoreboard
+  get "placar/:id", to: "scoreboard#user", as: :scoreboard_user
+  get "placar/:id/desafios/:challenge_id/entrega", to: "scoreboard#download", as: :scoreboard_download
   get "regras", to: "rules#show", as: :rules
   get "calendario", to: "calendars#mine", as: :calendar
   get "calendario/equipe", to: "calendars#team", as: :team_calendar

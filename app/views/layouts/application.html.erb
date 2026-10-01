@@ -36,7 +36,7 @@
 
           <% if authenticated? %>
             <%= link_to "Meu calendário", calendar_path, class: nav_link_classes(calendar_path) %>
-            <%= link_to "Equipe", team_calendar_path, class: nav_link_classes(team_calendar_path) %>
+            <%= link_to "Calendário da equipe", team_calendar_path, class: nav_link_classes(team_calendar_path) %>
             <% if Current.user.admin? %>
               <%= link_to "+ Novo desafio", new_admin_challenge_path, class: "btn-funky btn-funky--teal text-xs! py-1.5! px-3!" %>
               <%= link_to "Convidar", new_admin_invitation_path, class: nav_link_classes(new_admin_invitation_path) %>
