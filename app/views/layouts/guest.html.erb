@@ -23,12 +23,12 @@
     <%= render "shared/sketchy_defs" %>
 
     <main class="container mx-auto px-5 py-16 relative z-10">
-      <div class="max-w-3xl mx-auto grid md:grid-cols-[auto_1fr] gap-6 items-center">
+      <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-[auto_minmax(0,1fr)] gap-6 items-center">
         <div class="justify-self-center">
           <%= image_tag "mascot/login.png", alt: "", class: "w-40 sm:w-52 h-auto" %>
         </div>
 
-        <div class="browser-window w-full">
+        <div class="browser-window w-full min-w-0">
           <div class="browser-window__bar">
             <span class="browser-window__dot" style="background: var(--color-hotpink);"></span>
             <span class="browser-window__dot" style="background: var(--color-yellow);"></span>
