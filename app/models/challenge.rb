@@ -36,6 +36,10 @@ class Challenge < ApplicationRecord
     Time.current < starts_at
   end
 
+  def scores_for?(user)
+    !interns_only? || user.intern?
+  end
+
   def solved_by?(user)
     submissions.exists?(user: user, correct: true)
   end

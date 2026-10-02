@@ -14,8 +14,8 @@ class User < ApplicationRecord
   end
 
   scope :ranked_by_points, -> {
-    left_joins(:submissions)
-      .select("users.*, COUNT(CASE WHEN submissions.correct THEN 1 END) AS points_count")
+    left_joins(submissions: :challenge)
+      .select("users.*, COUNT(CASE WHEN submissions.correct AND (challenges.interns_only = FALSE OR users.intern) THEN 1 END) AS points_count")
       .group(:id)
       .order(Arel.sql("points_count DESC, users.name ASC"))
   }
@@ -25,6 +25,6 @@ class User < ApplicationRecord
   end
 
   def points
-    submissions.where(correct: true).count
+    submissions.scoring.count
   end
 end

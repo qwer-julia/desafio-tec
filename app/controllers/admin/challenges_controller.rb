@@ -44,7 +44,7 @@ module Admin
     end
 
     def challenge_params
-      params.expect(challenge: [ :title, :description, :starts_at, :ends_at, :prize_name, :prize_image ])
+      params.expect(challenge: [ :title, :description, :starts_at, :ends_at, :prize_name, :prize_image, :interns_only ])
     end
 
     def next_monday

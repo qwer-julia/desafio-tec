@@ -7,6 +7,13 @@ class Submission < ApplicationRecord
   has_one_attached :file
 
   validates :submitted_at, presence: true
+
+  # Entregas que valem ponto: tudo conta, exceto desafios do parquinho (interns_only) entregues por quem não é estagiário.
+  scope :scoring, -> {
+    joins(:user, :challenge)
+      .where(correct: true)
+      .where("challenges.interns_only = FALSE OR users.intern = TRUE")
+  }
   validate :file_is_a_zip
 
   private

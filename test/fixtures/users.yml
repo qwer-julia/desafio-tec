@@ -20,3 +20,11 @@ unconfirmed:
   password_digest: <%= password_digest %>
   confirmed_at:
   admin: false
+
+intern:
+  name: User Intern
+  email_address: intern@example.com
+  password_digest: <%= password_digest %>
+  confirmed_at: <%= 1.day.ago %>
+  admin: false
+  intern: true

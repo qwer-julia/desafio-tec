@@ -51,5 +51,15 @@
     </div>
   </div>
 
+  <div class="my-5">
+    <label class="flex items-start gap-3 cursor-pointer">
+      <%= form.check_box :interns_only, class: "mt-1.5" %>
+      <span>
+        <span class="font-display text-xs" style="color: var(--color-grape);">Parquinho dos estagiários</span>
+        <span class="block text-sm text-ink/60">Todo mundo pode ver e entregar, mas só estagiário ganha ponto.</span>
+      </span>
+    </label>
+  </div>
+
   <%= form.submit challenge.new_record? ? "Criar desafio" : "Salvar alterações", class: "btn-funky btn-funky--grape cursor-pointer" %>
 <% end %>

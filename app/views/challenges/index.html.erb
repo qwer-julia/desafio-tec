@@ -8,6 +8,9 @@
     <span class="badge-mono mb-3 inline-block" style="background: var(--color-ink); color: var(--color-yellow);">
       desafio da semana · até <%= l(@current_challenge.ends_at, format: :long) %>
     </span>
+    <% if @current_challenge.interns_only? %>
+      <span class="badge-mono mb-3 ml-1 inline-block"><%= icon "star" %> parquinho dos estagiários</span>
+    <% end %>
     <h2 class="font-display text-xl sm:text-2xl mb-4 max-w-md leading-snug">
       <%= link_to @current_challenge.title, challenge_path(@current_challenge), class: "hover:underline decoration-4" %>
     </h2>
@@ -45,7 +48,7 @@
     <ul class="flex flex-wrap gap-3">
       <% @upcoming_challenges.each do |challenge| %>
         <li class="badge-mono normal-case text-sm px-3 py-2">
-          <%= challenge.title %> · abre <%= l(challenge.starts_at, format: :short) %>
+          <%= challenge.title %><%= " · parquinho dos estagiários" if challenge.interns_only? %> · abre <%= l(challenge.starts_at, format: :short) %>
         </li>
       <% end %>
     </ul>
@@ -60,7 +63,10 @@
     <ul class="space-y-3">
       <% @past_challenges.each do |challenge| %>
         <li class="card-groovy px-5 py-4 flex justify-between items-center transition-transform hover:-translate-y-0.5">
-          <%= link_to challenge.title, challenge_path(challenge), class: "font-bold link-squiggle" %>
+          <span>
+            <%= link_to challenge.title, challenge_path(challenge), class: "font-bold link-squiggle" %>
+            <% if challenge.interns_only? %><span class="badge-mono ml-2"><%= icon "star" %> parquinho</span><% end %>
+          </span>
           <span class="badge-mono"><%= icon "trophy" %> <%= challenge.solvers.count %> resolveram</span>
         </li>
       <% end %>

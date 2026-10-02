@@ -24,4 +24,31 @@ class UserTest < ActiveSupport::TestCase
     assert_equal users(:two), ranked.first
     assert_equal 1, ranked.first.points_count
   end
+
+  test "intern earns points on interns-only challenges" do
+    challenge = challenges(:interns_week)
+    submission = Submission.new(user: users(:intern), challenge: challenge, correct: true, submitted_at: Time.current)
+    submission.file.attach(io: StringIO.new("zip"), filename: "a.zip", content_type: "application/zip")
+    submission.save!
+
+    assert_equal 1, users(:intern).points
+    assert_equal 1, User.ranked_by_points.find { |u| u == users(:intern) }.points_count
+  end
+
+  test "non-intern earns no points on interns-only challenges but keeps the submission" do
+    challenge = challenges(:interns_week)
+    submission = Submission.new(user: users(:two), challenge: challenge, correct: true, submitted_at: Time.current)
+    submission.file.attach(io: StringIO.new("zip"), filename: "a.zip", content_type: "application/zip")
+    submission.save!
+
+    assert challenge.solved_by?(users(:two))
+    assert_equal 1, users(:two).points
+    assert_equal 1, User.ranked_by_points.find { |u| u == users(:two) }.points_count
+  end
+
+  test "scores_for? is true for everyone on regular challenges and only interns on interns-only ones" do
+    assert challenges(:current_week).scores_for?(users(:two))
+    assert_not challenges(:interns_week).scores_for?(users(:two))
+    assert challenges(:interns_week).scores_for?(users(:intern))
+  end
 end

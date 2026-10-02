@@ -13,6 +13,12 @@
   <% end %>
 </p>
 
+<% if @challenge.interns_only? %>
+  <p class="badge-mono normal-case inline-block mb-6" style="background: var(--color-yellow);">
+    <%= icon "star" %> parquinho dos estagiários · gente grande pode brincar, mas só os pequenos ganham pirulito (ponto)
+  </p>
+<% end %>
+
 <div class="markdown-body mb-8"><%= markdown(@challenge.description) %></div>
 
 <% mascot = if @my_submission then "feliz" elsif @challenge.open? then "confuso" elsif @challenge.past? then "triste" end %>
@@ -23,7 +29,11 @@
 <% if @my_submission %>
   <div class="card-groovy p-5 mb-8" style="background: var(--color-teal);">
     <div>
-      <p class="font-bold">Você resolveu esse desafio. 1 ponto garantido!</p>
+      <% if @challenge.scores_for?(Current.user) %>
+        <p class="font-bold">Você resolveu esse desafio. 1 ponto garantido!</p>
+      <% else %>
+        <p class="font-bold">Entrega recebida! Aqui é o parquinho dos estagiários: você pode brincar à vontade, mas o pirulito (ponto) fica com os pequenos.</p>
+      <% end %>
       <% if @my_submission.file.attached? %>
         <p class="text-sm mt-1">
           Sua entrega de <%= l(@my_submission.submitted_at, format: :short) %>:
