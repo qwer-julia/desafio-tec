@@ -16,6 +16,8 @@ class Challenge < ApplicationRecord
   scope :past, -> { where("ends_at <= ?", Time.current).ordered }
   scope :upcoming, -> { where("starts_at > ?", Time.current).ordered }
 
+  scope :open_now, -> { where("starts_at <= :now AND ends_at > :now", now: Time.current).order(starts_at: :desc, id: :desc) }
+
   def self.current
     where("starts_at <= :now AND ends_at > :now", now: Time.current).order(starts_at: :desc).first
   end

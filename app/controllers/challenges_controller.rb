@@ -1,6 +1,6 @@
 class ChallengesController < ApplicationController
   def index
-    @current_challenge = Challenge.current
+    @current_challenges = Challenge.open_now
     @upcoming_challenges = Challenge.upcoming
     @past_challenges = Challenge.past.reverse_order
   end
