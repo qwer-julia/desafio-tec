@@ -3,9 +3,9 @@ require "test_helper"
 class BrevoDeliveryMethodTest < ActiveSupport::TestCase
   setup do
     @mail = Mail.new do
-      from "Desafio Tec <fonjulia89@gmail.com>"
+      from "Rataria <fonjulia89@gmail.com>"
       to "convidado@example.com"
-      subject "Você foi convidado(a) para o Desafio Tec"
+      subject "Você foi convidado(a) para a Rataria"
       text_part { body "texto simples" }
       html_part { content_type "text/html; charset=UTF-8"; body "<p>html</p>" }
     end
@@ -29,7 +29,7 @@ class BrevoDeliveryMethodTest < ActiveSupport::TestCase
 
     payload = JSON.parse(captured_request.body)
     assert_equal "fonjulia89@gmail.com", payload.dig("sender", "email")
-    assert_equal "Desafio Tec", payload.dig("sender", "name")
+    assert_equal "Rataria", payload.dig("sender", "name")
     assert_equal [ "convidado@example.com" ], payload["to"].map { |r| r["email"] }
     assert_equal "<p>html</p>", payload["htmlContent"]
     assert_equal "texto simples", payload["textContent"]

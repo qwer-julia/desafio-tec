@@ -1,11 +1,11 @@
 <% content_for :title, "Redefinição de senha" %>
-<% content_for :preheader, "Redefina sua senha do Desafio Tec — o link expira em breve." %>
+<% content_for :preheader, "Redefina sua senha da Rataria — o link expira em breve." %>
 
 <h1 style="margin:0 0 18px; display:inline-block; font-family:'Kalam','Trebuchet MS',cursive; font-weight:700; font-size:22px; color:#1a1a1a;">
   Redefinir senha
 </h1>
 
-<p style="margin:0 0 20px;">Oi! Recebemos um pedido para redefinir a senha da sua conta no Desafio Tec.</p>
+<p style="margin:0 0 20px;">Oi! Recebemos um pedido para redefinir a senha da sua conta na Rataria.</p>
 
 <%= render "mailer/button", url: edit_password_url(@user.password_reset_token), label: "Redefinir senha", color: "#595959" %>
 

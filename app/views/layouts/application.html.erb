@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Desafio Tec" %></title>
+    <title><%= content_for(:title) || "Rataria" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Desafio Tec">
+    <meta name="application-name" content="Rataria">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -27,7 +27,7 @@
 
     <nav class="bg-paper border-b-[1.5px] border-ink relative z-10">
       <div class="container mx-auto px-5 py-4 flex flex-wrap items-center justify-between gap-4">
-        <%= link_to root_path, class: "font-display text-xl sm:text-2xl text-3d-sm shrink-0" do %>DESAFIO TEC<% end %>
+        <%= link_to root_path, class: "font-display text-xl sm:text-2xl text-3d-sm shrink-0" do %>RATARIA<% end %>
 
         <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-sm font-bold">
           <%= link_to "Desafios", challenges_path, class: nav_link_classes(challenges_path, controller: "challenges") %>
@@ -58,7 +58,7 @@
           <span class="browser-window__dot" style="background: var(--color-hotpink);"></span>
           <span class="browser-window__dot" style="background: var(--color-yellow);"></span>
           <span class="browser-window__dot" style="background: var(--color-teal);"></span>
-          <span class="browser-window__url">desafio-tec.local<%= request.path %></span>
+          <span class="browser-window__url">rataria.local<%= request.path %></span>
         </div>
         <div class="p-6 sm:p-10">
           <%= render "shared/flash" %>

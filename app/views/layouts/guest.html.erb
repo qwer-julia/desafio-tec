@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Desafio Tec" %></title>
+    <title><%= content_for(:title) || "Rataria" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -33,10 +33,10 @@
             <span class="browser-window__dot" style="background: var(--color-hotpink);"></span>
             <span class="browser-window__dot" style="background: var(--color-yellow);"></span>
             <span class="browser-window__dot" style="background: var(--color-teal);"></span>
-            <span class="browser-window__url">desafio-tec.local<%= request.path %></span>
+            <span class="browser-window__url">rataria.local<%= request.path %></span>
           </div>
           <div class="p-6 sm:p-8">
-            <%= link_to root_path, class: "font-display text-lg text-3d-sm inline-block mb-6" do %>DESAFIO TEC<% end %>
+            <%= link_to root_path, class: "font-display text-lg text-3d-sm inline-block mb-6" do %>RATARIA<% end %>
             <%= render "shared/flash" %>
             <%= yield %>
           </div>

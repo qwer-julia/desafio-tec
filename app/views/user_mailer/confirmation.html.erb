@@ -1,14 +1,14 @@
 <% content_for :title, "Confirme seu e-mail" %>
-<% content_for :preheader, "Falta pouco! Confirme seu e-mail para ativar seu cadastro no Desafio Tec." %>
+<% content_for :preheader, "Falta pouco! Confirme seu e-mail para ativar seu cadastro na Rataria." %>
 
 <h1 style="margin:0 0 18px; display:inline-block; font-family:'Kalam','Trebuchet MS',cursive; font-weight:700; font-size:22px; color:#1a1a1a;">
   Confirme seu e-mail
 </h1>
 
-<p style="margin:0 0 20px;">Olá, <%= @user.name %>! Falta pouco para ativar seu cadastro no Desafio Tec.</p>
+<p style="margin:0 0 20px;">Olá, <%= @user.name %>! Falta pouco para ativar seu cadastro na Rataria.</p>
 
 <%= render "mailer/button", url: confirm_email_url(@token), label: "Confirmar e-mail", color: "#262626" %>
 
 <p style="margin:0; font-size:13px; color:rgba(26,26,26,0.7);">
-  Esse link expira em 1 dia. Se você não criou uma conta no Desafio Tec, pode ignorar este e-mail.
+  Esse link expira em 1 dia. Se você não criou uma conta na Rataria, pode ignorar este e-mail.
 </p>

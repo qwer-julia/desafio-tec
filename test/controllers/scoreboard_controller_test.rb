@@ -36,4 +36,13 @@ class ScoreboardControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "a[href=?]", edit_avatar_path, count: 0
   end
+
+  test "show displays each user's avatar face" do
+    users(:two).update!(avatar_costume: "mago")
+    sign_in_as(users(:one))
+    get scoreboard_path
+    assert_select "tbody tr", minimum: 2
+    assert_select "tbody img[src=?]", "/avatar/fantasia_mago.png", count: 1
+    assert_select "tbody img[src=?]", "/avatar/neutro.png", minimum: 2
+  end
 end

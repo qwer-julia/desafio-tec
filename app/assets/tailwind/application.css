@@ -186,6 +186,17 @@
     pointer-events: none;
   }
 
+  /* ---- hand-drawn ring around the avatar face icon ---- */
+  .avatar-face::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 9999px;
+    border: 1.75px solid var(--color-ink);
+    filter: url(#sketchy);
+    pointer-events: none;
+  }
+
   /* ---- form fields ---- */
   .input-sketchy {
     display: block;

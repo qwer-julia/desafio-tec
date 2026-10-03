@@ -1,11 +1,11 @@
 <% content_for :title, "Você foi convidado(a)" %>
-<% content_for :preheader, "#{@invitation.invited_by.name} te convidou para participar do Desafio Tec." %>
+<% content_for :preheader, "#{@invitation.invited_by.name} te convidou para participar da Rataria." %>
 
 <h1 style="margin:0 0 18px; display:inline-block; font-family:'Kalam','Trebuchet MS',cursive; font-weight:700; font-size:22px; color:#1a1a1a;">
   Você foi convidado(a)!
 </h1>
 
-<p style="margin:0 0 20px;"><%= @invitation.invited_by.name %> te convidou para participar do Desafio Tec. Crie sua conta para começar a resolver os desafios.</p>
+<p style="margin:0 0 20px;"><%= @invitation.invited_by.name %> te convidou para participar da Rataria. Crie sua conta para começar a resolver os desafios.</p>
 
 <%= render "mailer/button", url: signup_url(@token), label: "Aceitar convite", color: "#262626" %>
 
