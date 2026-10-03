@@ -4,7 +4,7 @@
 
 <% if @challenges.empty? %>
   <div class="flex items-center gap-4">
-    <%= image_tag "mascot/neutro.png", alt: "", class: "w-20 h-auto" %>
+    <%= avatar @user, class: "w-20" %>
     <p class="text-ink/60">Ainda não teve nenhum desafio.</p>
   </div>
 <% else %>

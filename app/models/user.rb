@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email_address, uniqueness: { message: "já utilizado" }
+  validates :avatar_costume, inclusion: { in: Avatar::COSTUMES.keys }, allow_nil: true
+  validate :avatar_accessories_known
 
   generates_token_for :email_confirmation, expires_in: 1.day do
     confirmed_at
@@ -26,5 +28,15 @@ class User < ApplicationRecord
 
   def points
     submissions.scoring.count
+  end
+
+  def avatar_layers
+    Avatar.layers(costume: avatar_costume, accessories: avatar_accessories)
+  end
+
+  private
+
+  def avatar_accessories_known
+    errors.add(:avatar_accessories, :invalid) unless (avatar_accessories - Avatar::ACCESSORIES.keys).empty?
   end
 end

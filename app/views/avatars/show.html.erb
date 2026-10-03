@@ -1,0 +1,41 @@
+<h1 class="font-display text-2xl sm:text-3xl text-3d mb-8">MEU AVATAR</h1>
+
+<%= form_with model: Current.user, url: avatar_path, method: :patch, class: "contents",
+      data: { controller: "avatar-preview" } do |form| %>
+  <div class="grid sm:grid-cols-[14rem_1fr] gap-8 items-start">
+    <%= avatar Current.user, class: "w-48 sm:w-56 mx-auto", data: { avatar_preview_target: "stage" } %>
+
+    <div>
+      <fieldset class="mb-6">
+        <legend class="font-display text-xs mb-2" style="color: var(--color-grape);">FANTASIA (UMA SÓ)</legend>
+        <div class="flex flex-wrap gap-x-5 gap-y-2">
+          <label class="flex items-center gap-2 font-bold">
+            <%= form.radio_button :avatar_costume, "", checked: Current.user.avatar_costume.nil?, data: { action: "avatar-preview#update" } %>
+            Nenhuma
+          </label>
+          <% Avatar::COSTUMES.each do |key, label| %>
+            <label class="flex items-center gap-2 font-bold">
+              <%= form.radio_button :avatar_costume, key, data: { action: "avatar-preview#update", layer: "fantasia_#{key}" } %>
+              <%= label %>
+            </label>
+          <% end %>
+        </div>
+      </fieldset>
+
+      <fieldset class="mb-8">
+        <legend class="font-display text-xs mb-2" style="color: var(--color-grape);">ACESSÓRIOS</legend>
+        <div class="flex flex-wrap gap-x-5 gap-y-2">
+          <%= hidden_field_tag "user[avatar_accessories][]", "", id: nil %>
+          <% Avatar::ACCESSORIES.each do |key, label| %>
+            <label class="flex items-center gap-2 font-bold">
+              <%= check_box_tag "user[avatar_accessories][]", key, Current.user.avatar_accessories.include?(key), id: "user_avatar_accessories_#{key}", data: { action: "avatar-preview#update", layer: key } %>
+              <%= label %>
+            </label>
+          <% end %>
+        </div>
+      </fieldset>
+
+      <%= form.submit "Salvar avatar", class: "btn-funky btn-funky--grape cursor-pointer" %>
+    </div>
+  </div>
+<% end %>

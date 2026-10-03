@@ -15,6 +15,13 @@ module ApplicationHelper
     svg.sub("<svg ", "<svg #{attrs}").html_safe
   end
 
+  # The user's mascot: stacked transparent layers (base, costume, accessories) sharing one canvas.
+  def avatar(user = nil, layers: nil, class: "w-20", **attrs)
+    layers ||= user ? user.avatar_layers : Avatar.layers(costume: nil, accessories: [])
+    images = layers.map { |name| image_tag("/avatar/#{name}.png", alt: "", class: "absolute inset-0 w-full h-full", data: { layer: name }) }
+    tag.div(safe_join(images), class: [ "relative aspect-[1600/2458] shrink-0", binding.local_variable_get(:class) ], **attrs)
+  end
+
   # Renders Markdown to HTML. Raw HTML in the source is dropped (commonmarker's default), so the output is safe.
   def markdown(text)
     Commonmarker.to_html(
