@@ -22,6 +22,26 @@ class ChallengesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".prize-spotlight__star polygon"
   end
 
+  test "index shows a shared prize once below the open challenges" do
+    second = Challenge.create!(title: "Outro desafio aberto", slug: "outro-desafio-aberto", description: "x", starts_at: 1.day.ago, ends_at: 3.days.from_now, created_by: users(:one))
+    [ challenges(:current_week), second ].each do |challenge|
+      challenge.update!(prize_name: "Brigadeiro", prize_image: fixture_file_upload("prize.png", "image/png"))
+    end
+
+    get challenges_path
+    assert_select ".prize-spotlight", count: 1
+    assert_select "a", text: "Encarar o desafio", count: 2
+  end
+
+  test "index shows each distinct prize" do
+    second = Challenge.create!(title: "Outro desafio aberto", slug: "outro-desafio-aberto", description: "x", starts_at: 1.day.ago, ends_at: 3.days.from_now, created_by: users(:one))
+    challenges(:current_week).update!(prize_name: "Brigadeiro", prize_image: fixture_file_upload("prize.png", "image/png"))
+    second.update!(prize_name: "Beijinho", prize_image: fixture_file_upload("prize.png", "image/png"))
+
+    get challenges_path
+    assert_select ".prize-spotlight", count: 2
+  end
+
   test "index skips the prize highlight when there is no prize image" do
     get challenges_path
     assert_select ".prize-spotlight", count: 0
