@@ -22,6 +22,20 @@ module ApplicationHelper
     tag.div(safe_join(images), class: [ "relative aspect-[1600/2458] shrink-0", binding.local_variable_get(:class) ], **attrs)
   end
 
+  # Just the face of the user's mascot, cropped from the full-size layers, for use as a round icon.
+  FACE_CROP = { x: 395, y: 565, size: 710 }.freeze
+  CANVAS_WIDTH = 1600
+
+  def avatar_face(user, class: "w-8 h-8")
+    crop = FACE_CROP
+    stage = tag.div(
+      safe_join(user.avatar_layers.map { |name| image_tag("/avatar/#{name}.png", alt: "", class: "absolute inset-0 w-full h-full") }),
+      class: "absolute aspect-[1600/2458]",
+      style: "width: #{(CANVAS_WIDTH * 100.0 / crop[:size]).round(2)}%; left: #{(-crop[:x] * 100.0 / crop[:size]).round(2)}%; top: #{(-crop[:y] * 100.0 / crop[:size]).round(2)}%;"
+    )
+    tag.span(stage, class: [ "relative inline-block shrink-0 overflow-hidden rounded-full border-[1.5px] border-ink bg-white", binding.local_variable_get(:class) ], aria: { hidden: true })
+  end
+
   # Renders Markdown to HTML. Raw HTML in the source is dropped (commonmarker's default), so the output is safe.
   def markdown(text)
     Commonmarker.to_html(

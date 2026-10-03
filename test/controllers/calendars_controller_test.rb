@@ -3,12 +3,6 @@ require "test_helper"
 class CalendarsControllerTest < ActionDispatch::IntegrationTest
   setup { sign_in_as(users(:one)) }
 
-  test "mine shows only past and current challenges" do
-    get calendar_path
-    assert_response :success
-    assert_no_match challenges(:next_week).title, response.body
-  end
-
   test "team shows who delivered inside the square of the day they delivered" do
     get team_calendar_path
     assert_response :success

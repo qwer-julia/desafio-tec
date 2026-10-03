@@ -4,14 +4,14 @@ class AvatarsControllerTest < ActionDispatch::IntegrationTest
   setup { sign_in_as(users(:one)) }
 
   test "show previews the base mascot" do
-    get avatar_path
+    get edit_avatar_path
     assert_response :success
     assert_select "img[data-layer=neutro]"
   end
 
   test "update saves one costume and accessories" do
     patch avatar_path, params: { user: { avatar_costume: "mago", avatar_accessories: [ "", "oculos_sol", "bigode" ] } }
-    assert_redirected_to avatar_path
+    assert_redirected_to scoreboard_user_path(users(:one))
     user = users(:one).reload
     assert_equal "mago", user.avatar_costume
     assert_equal %w[oculos_sol bigode], user.avatar_accessories
@@ -36,7 +36,7 @@ class AvatarsControllerTest < ActionDispatch::IntegrationTest
 
   test "requires login" do
     delete logout_path
-    get avatar_path
+    get edit_avatar_path
     assert_redirected_to login_path
   end
 end

@@ -35,16 +35,15 @@
           <%= link_to "Regras", rules_path, class: nav_link_classes(rules_path) %>
 
           <% if authenticated? %>
-            <%= link_to "Meu calendário", calendar_path, class: nav_link_classes(calendar_path) %>
             <%= link_to "Calendário da equipe", team_calendar_path, class: nav_link_classes(team_calendar_path) %>
-            <%= link_to "Meu avatar", avatar_path, class: nav_link_classes(avatar_path) %>
             <% if Current.user.admin? %>
               <%= link_to "+ Novo desafio", new_admin_challenge_path, class: "btn-funky btn-funky--teal text-xs! py-1.5! px-3!" %>
               <%= link_to "Convidar", new_admin_invitation_path, class: nav_link_classes(new_admin_invitation_path) %>
             <% end %>
-            <span class="badge-mono">
-              <%= Current.user.name %> · <%= Current.user.points %> pts
-            </span>
+            <%= link_to scoreboard_user_path(Current.user), class: "#{nav_link_classes(scoreboard_user_path(Current.user))} flex items-center gap-2" do %>
+              <%= avatar_face Current.user %>
+              <span><%= Current.user.name %></span>
+            <% end %>
             <%= button_to "Sair", logout_path, method: :delete, class: "nav-link bg-transparent cursor-pointer" %>
           <% else %>
             <%= link_to "Entrar", login_path, class: "btn-funky btn-funky--pink text-xs! py-1.5! px-3!" %>

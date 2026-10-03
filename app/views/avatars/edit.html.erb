@@ -35,7 +35,10 @@
         </div>
       </fieldset>
 
-      <%= form.submit "Salvar avatar", class: "btn-funky btn-funky--grape cursor-pointer" %>
+      <div class="flex items-center gap-4">
+        <%= form.submit "Salvar avatar", class: "btn-funky btn-funky--grape cursor-pointer" %>
+        <%= link_to "Cancelar", scoreboard_user_path(Current.user), class: "link-squiggle font-bold" %>
+      </div>
     </div>
   </div>
 <% end %>

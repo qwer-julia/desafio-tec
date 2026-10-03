@@ -1,13 +1,13 @@
 class AvatarsController < ApplicationController
-  def show
+  def edit
   end
 
   def update
     if Current.user.update(avatar_params)
-      redirect_to avatar_path, notice: "Avatar atualizado."
+      redirect_to scoreboard_user_path(Current.user), notice: "Avatar atualizado."
     else
       flash.now[:alert] = "Não foi possível salvar o avatar."
-      render :show, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 

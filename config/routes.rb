@@ -22,9 +22,8 @@ Rails.application.routes.draw do
   get "placar", to: "scoreboard#show", as: :scoreboard
   get "placar/:id", to: "scoreboard#user", as: :scoreboard_user
   get "placar/:id/desafios/:challenge_id/entrega", to: "scoreboard#download", as: :scoreboard_download
-  resource :avatar, path: "avatar", only: [ :show, :update ]
+  resource :avatar, path: "avatar", only: [ :edit, :update ]
   get "regras", to: "rules#show", as: :rules
-  get "calendario", to: "calendars#mine", as: :calendar
   get "calendario/equipe", to: "calendars#team", as: :team_calendar
 
   namespace :admin do

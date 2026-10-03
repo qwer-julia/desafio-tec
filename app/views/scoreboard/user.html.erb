@@ -1,12 +1,20 @@
-<h1 class="font-display text-3xl sm:text-4xl text-3d mb-2"><%= @user.name.upcase %></h1>
-<p class="badge-mono inline-block mb-8"><%= @user.points %> pontos até agora</p>
+<div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8">
+  <%= avatar @user, class: "w-40 sm:w-48" %>
+  <div class="text-center sm:text-left">
+    <h1 class="font-display text-3xl sm:text-4xl text-3d mb-3"><%= @user.name.upcase %></h1>
+    <p class="badge-mono inline-block mb-2"><%= @submissions_by_challenge_id.size %> <%= @submissions_by_challenge_id.size == 1 ? "desafio resolvido" : "desafios resolvidos" %></p><br>
+    <p class="badge-mono inline-block mb-4"><%= @user.points %> pontos até agora</p>
+    <% if @user == Current.user %>
+      <div><%= link_to "Editar avatar", edit_avatar_path, class: "btn-funky btn-funky--grape text-xs! py-1.5! px-3!" %></div>
+    <% end %>
+  </div>
+</div>
 <p class="mb-8"><%= link_to "← Voltar ao placar", scoreboard_path, class: "link-squiggle font-bold" %></p>
 
+<h2 class="font-display text-xl mb-4" style="color: var(--color-grape);">CALENDÁRIO</h2>
+
 <% if @challenges.empty? %>
-  <div class="flex items-center gap-4">
-    <%= avatar @user, class: "w-20" %>
-    <p class="text-ink/60">Ainda não teve nenhum desafio.</p>
-  </div>
+  <p class="text-ink/60">Ainda não teve nenhum desafio.</p>
 <% else %>
   <ul class="grid sm:grid-cols-2 gap-3">
     <% @challenges.each do |challenge| %>
