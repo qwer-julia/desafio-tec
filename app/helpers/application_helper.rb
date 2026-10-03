@@ -26,7 +26,7 @@ module ApplicationHelper
   FACE_CROP = { x: 395, y: 565, size: 710 }.freeze
   CANVAS_WIDTH = 1600
 
-  def avatar_face(user, class: "w-8 h-8")
+  def avatar_face(user, class: "w-10 h-10")
     crop = FACE_CROP
     stage = tag.div(
       safe_join(user.avatar_layers.map { |name| image_tag("/avatar/#{name}.png", alt: "", class: "absolute inset-0 w-full h-full") }),
